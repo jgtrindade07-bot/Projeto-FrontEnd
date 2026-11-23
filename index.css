@@ -1,0 +1,172 @@
+/* Estilos da página principal. Usa as variáveis e componentes de style.css */
+
+body.home { font-family: "Open Sans", var(--fonte); }
+.home h1, .home h2, .home h3, .home .logo, .home .btn, .home .menu a {
+  font-family: var(--fonte);
+}
+
+/* Cabeçalho com menu */
+.topo-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.menu {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.menu a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.92rem;
+  padding: 8px 12px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.15s, color 0.15s;
+}
+.menu a:hover,
+.menu a:focus-visible { background: var(--amarelo); color: var(--preto); outline: none; }
+.menu .menu-destaque { border: 2px solid var(--amarelo); color: var(--amarelo); }
+.menu .menu-admin { color: var(--amarelo); }
+.menu-botao {
+  display: none;
+  font: inherit;
+  font-weight: 800;
+  background: var(--amarelo);
+  color: var(--preto);
+  border: 0;
+  padding: 8px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+/* Ícones */
+.icone { width: 18px; height: 18px; fill: currentColor; flex-shrink: 0; }
+.icone-card { width: 36px; height: 36px; fill: var(--amarelo-escuro); margin-bottom: 8px; }
+
+/* Mensagem de boas-vindas */
+.boas-vindas {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: var(--preto);
+  color: var(--amarelo);
+  padding: 12px 24px;
+  font-weight: 600;
+}
+.boas-vindas[hidden] { display: none; }
+.boas-vindas button {
+  background: none;
+  border: 0;
+  color: inherit;
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* Hero */
+.hero {
+  background: var(--amarelo);
+  padding: 80px 24px;
+}
+.hero-texto { max-width: 1000px; margin: 0 auto; }
+.hero h1 {
+  font-size: clamp(2.2rem, 6vw, 4rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -1px;
+  max-width: 14ch;
+}
+.hero p { margin-top: 20px; font-size: 1.1rem; max-width: 46ch; line-height: 1.5; }
+.hero .botoes { margin-top: 28px; flex-wrap: wrap; }
+.hero .btn { text-decoration: none; text-align: center; }
+.hero .btn-primario { flex: 0 0 auto; }
+.hero .dica { font-weight: 600; min-height: 1.5em; }
+
+/* Seções */
+.secao { padding: 64px 24px; max-width: 1100px; margin: 0 auto; }
+.secao h2 { font-size: 1.9rem; font-weight: 800; letter-spacing: -0.5px; }
+.secao-sub { color: var(--cinza); margin: 6px 0 28px; }
+.secao-escura { max-width: none; background: var(--preto); color: #fff; }
+.secao-escura > * { max-width: 1100px; margin-left: auto; margin-right: auto; }
+.secao-escura .secao-sub { color: #bbb; }
+
+.grade {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.card {
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+}
+.card img { display: block; width: 100%; height: auto; }
+.card-corpo { padding: 20px 22px 24px; }
+.card h3 { font-size: 1.2rem; font-weight: 800; margin-bottom: 6px; }
+.card p { color: var(--cinza); line-height: 1.5; }
+
+/* Planos */
+.planos {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.plano {
+  border: 2px solid #444;
+  border-radius: 16px;
+  padding: 28px 24px;
+}
+.plano-destaque { background: var(--amarelo); color: var(--preto); border-color: var(--amarelo); }
+.plano h3 { font-weight: 800; font-size: 1.2rem; }
+.preco { font-family: var(--fonte); font-weight: 800; font-size: 2.2rem; margin: 10px 0; }
+.preco span { font-size: 0.9rem; font-weight: 600; }
+
+/* Rodapé */
+.rodape { background: var(--preto); color: #ddd; padding: 40px 24px 20px; }
+.rodape-grade {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 32px;
+}
+.rodape h2 { color: var(--amarelo); font-size: 1.1rem; margin-bottom: 10px; }
+.rodape ul { list-style: none; }
+.rodape li { margin-bottom: 6px; }
+.rodape a { color: #fff; }
+.rodape a:hover { color: var(--amarelo); }
+.rodape .copy {
+  max-width: 1100px;
+  margin: 28px auto 0;
+  padding-top: 16px;
+  border-top: 1px solid #333;
+  font-size: 0.85rem;
+}
+
+/* Responsivo */
+@media (max-width: 800px) {
+  .menu-botao { display: inline-block; }
+  .menu {
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+  .menu.aberto { display: flex; }
+  .grade, .planos, .rodape-grade { grid-template-columns: 1fr; }
+  .hero { padding: 48px 24px; }
+}
