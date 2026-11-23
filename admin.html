@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin – Cadastro de usuários</title>
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <main class="admin">
+    <header class="admin__header">
+      <h1>Cadastro de usuários</h1>
+      <p>Adicione pessoas à lista. Os dados ficam salvos neste navegador.</p>
+    </header>
+
+    <form id="form-usuario" class="form" novalidate>
+      <div class="campo">
+        <label for="nome">Nome</label>
+        <input type="text" id="nome" name="nome" placeholder="Ex.: Maria Souza" autocomplete="name" required>
+      </div>
+
+      <div class="campo">
+        <label for="email">E-mail</label>
+        <input type="email" id="email" name="email" placeholder="maria@exemplo.com" autocomplete="email" required>
+      </div>
+
+      <p id="mensagem" class="mensagem" role="alert" aria-live="polite"></p>
+
+      <button type="submit" class="botao">Cadastrar</button>
+    </form>
+
+    <section class="lista" aria-labelledby="titulo-lista">
+      <div class="lista__topo">
+        <h2 id="titulo-lista">Usuários cadastrados</h2>
+        <span id="contador" class="contador">0</span>
+      </div>
+
+      <ul id="lista-usuarios" class="usuarios"></ul>
+      <p id="lista-vazia" class="vazio">Nenhum usuário cadastrado ainda. Preencha o formulário acima para começar.</p>
+    </section>
+  </main>
+
+  <script src="admin.js"></script>
+</body>
+</html>
