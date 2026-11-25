@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Entrar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topo"><a href="index.html">Sua Academia</a></header>
+
+  <main class="pagina">
+    <section class="destaque">
+      <h1>Bom te ver de volta.</h1>
+      <p>Entre para acompanhar seus treinos e seu plano.</p>
+    </section>
+
+    <section class="painel">
+      <div class="cartao">
+        <h2>Entrar</h2>
+        <p class="sub">Use o e-mail e a senha do seu cadastro.</p>
+
+        <form id="form-login" novalidate>
+          <div class="campo">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" autocomplete="email">
+            <span class="erro" aria-live="polite"></span>
+          </div>
+
+          <div class="campo">
+            <label for="senha">Senha</label>
+            <input type="password" id="senha" name="senha" autocomplete="current-password">
+            <span class="erro" aria-live="polite"></span>
+          </div>
+
+          <div class="botoes">
+            <button type="submit" class="btn btn-primario">Entrar</button>
+          </div>
+
+          <div id="mensagem" class="mensagem" role="status"></div>
+        </form>
+
+        <p class="alternar">Ainda não tem conta? <a href="cadastro.html">Cadastre-se</a></p>
+      </div>
+    </section>
+  </main>
+
+  <script src="login.js"></script>
+</body>
+</html>
