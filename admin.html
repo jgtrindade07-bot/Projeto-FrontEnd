@@ -26,7 +26,10 @@
 
       <p id="mensagem" class="mensagem" role="alert" aria-live="polite"></p>
 
-      <button type="submit" class="botao">Cadastrar</button>
+      <div class="form__acoes">
+        <button type="submit" class="botao">Cadastrar</button>
+        <button type="reset" class="botao botao--secundario">Limpar campos</button>
+      </div>
     </form>
 
     <section class="lista" aria-labelledby="titulo-lista">
@@ -35,8 +38,38 @@
         <span id="contador" class="contador">0</span>
       </div>
 
+      <div class="lista__acoes">
+        <div class="campo">
+          <label for="pesquisa-usuario">Pesquisar por nome ou e-mail</label>
+          <input
+            type="search"
+            id="pesquisa-usuario"
+            placeholder="Digite um nome ou e-mail"
+            autocomplete="off"
+            aria-controls="lista-usuarios"
+          >
+        </div>
+
+        <button type="button" id="excluir-todos" class="botao botao--perigo" disabled>
+          Excluir todos
+        </button>
+      </div>
+
+      <p id="mensagem-lista" class="mensagem lista__mensagem" role="status"></p>
+
       <ul id="lista-usuarios" class="usuarios"></ul>
-      <p id="lista-vazia" class="vazio">Nenhum usuário cadastrado ainda. Preencha o formulário acima para começar.</p>
+
+      <p id="sem-resultados" class="vazio" hidden>
+        Nenhum usuário corresponde à pesquisa.
+      </p>
+
+      <p id="lista-vazia" class="vazio">
+        Nenhum usuário cadastrado ainda. Preencha o formulário acima para começar.
+      </p>
+
+      <template id="modelo-excluir-usuario">
+        <button type="button" class="botao botao--perigo usuario__excluir">Excluir</button>
+      </template>
     </section>
   </main>
 

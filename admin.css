@@ -11,7 +11,9 @@
   --raio: 8px;
 }
 
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
@@ -27,10 +29,18 @@ body {
   padding: 2rem 1rem 3rem;
 }
 
-.admin__header h1 { margin: 0 0 .25rem; font-size: 1.6rem; }
-.admin__header p  { margin: 0 0 1.5rem; color: var(--texto-suave); }
+.admin__header h1 {
+  margin: 0 0 .25rem;
+  font-size: 1.6rem;
+}
+
+.admin__header p {
+  margin: 0 0 1.5rem;
+  color: var(--texto-suave);
+}
 
 /* ---------- Formulário ---------- */
+
 .form {
   background: var(--superficie);
   border: 1px solid var(--borda);
@@ -40,9 +50,15 @@ body {
   gap: 1rem;
 }
 
-.campo { display: grid; gap: .35rem; }
+.campo {
+  display: grid;
+  gap: .35rem;
+}
 
-.campo label { font-weight: 600; font-size: .95rem; }
+.campo label {
+  font-weight: 600;
+  font-size: .95rem;
+}
 
 .campo input {
   width: 100%;
@@ -55,7 +71,9 @@ body {
   transition: border-color .15s, box-shadow .15s;
 }
 
-.campo input::placeholder { color: #9aa3b2; }
+.campo input::placeholder {
+  color: #9aa3b2;
+}
 
 .campo input:focus {
   outline: none;
@@ -63,11 +81,23 @@ body {
   box-shadow: 0 0 0 3px rgba(43, 90, 220, .2);
 }
 
-.campo input.invalido { border-color: var(--erro); }
+.campo input.invalido {
+  border-color: var(--erro);
+}
 
-.mensagem { margin: 0; min-height: 1.2em; font-size: .9rem; }
-.mensagem.erro    { color: var(--erro); }
-.mensagem.sucesso { color: var(--sucesso); }
+.mensagem {
+  margin: 0;
+  min-height: 1.2em;
+  font-size: .9rem;
+}
+
+.mensagem.erro {
+  color: var(--erro);
+}
+
+.mensagem.sucesso {
+  color: var(--sucesso);
+}
 
 .botao {
   justify-self: start;
@@ -82,11 +112,20 @@ body {
   transition: background .15s;
 }
 
-.botao:hover { background: var(--primaria-escura); }
-.botao:focus-visible { outline: 3px solid rgba(43, 90, 220, .4); outline-offset: 2px; }
+.botao:hover {
+  background: var(--primaria-escura);
+}
+
+.botao:focus-visible {
+  outline: 3px solid rgba(43, 90, 220, .4);
+  outline-offset: 2px;
+}
 
 /* ---------- Lista ---------- */
-.lista { margin-top: 2rem; }
+
+.lista {
+  margin-top: 2rem;
+}
 
 .lista__topo {
   display: flex;
@@ -95,7 +134,10 @@ body {
   margin-bottom: .75rem;
 }
 
-.lista__topo h2 { margin: 0; font-size: 1.2rem; }
+.lista__topo h2 {
+  margin: 0;
+  font-size: 1.2rem;
+}
 
 .contador {
   min-width: 1.8rem;
@@ -129,9 +171,25 @@ body {
   flex-wrap: wrap;
 }
 
-.usuario__nome  { margin: 0; font-weight: 600; }
-.usuario__email { margin: 0; color: var(--texto-suave); font-size: .92rem; word-break: break-all; }
-.usuario__data  { margin: 0; color: var(--texto-suave); font-size: .85rem; white-space: nowrap; }
+.usuario__nome {
+  margin: 0;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.usuario__email {
+  margin: 0;
+  color: var(--texto-suave);
+  font-size: .92rem;
+  word-break: break-all;
+}
+
+.usuario__data {
+  margin: 0;
+  color: var(--texto-suave);
+  font-size: .85rem;
+  white-space: nowrap;
+}
 
 .vazio {
   margin: 0;
@@ -143,9 +201,91 @@ body {
   border-radius: var(--raio);
 }
 
-.vazio[hidden] { display: none; }
+.vazio[hidden] {
+  display: none;
+}
+
+/* ---------- Gerenciamento de usuários ---------- */
+
+.form__acoes,
+.lista__acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+}
+
+.lista__acoes {
+  align-items: flex-end;
+  margin-bottom: .75rem;
+}
+
+.lista__acoes .campo {
+  flex: 1 1 14rem;
+}
+
+.botao--secundario {
+  color: var(--primaria-escura);
+  background: #e3eafc;
+}
+
+.botao--secundario:hover {
+  background: #d5e0fc;
+}
+
+.botao--perigo {
+  color: var(--erro);
+  background: var(--superficie);
+  border: 1px solid currentColor;
+}
+
+.botao--perigo:not(:disabled):hover {
+  color: var(--superficie);
+  background: var(--erro);
+}
+
+.botao--perigo:disabled {
+  color: var(--texto-suave);
+  background: var(--fundo);
+  border-color: var(--borda);
+  cursor: default;
+}
+
+.lista__mensagem {
+  margin-bottom: .75rem;
+}
+
+.lista__mensagem:empty {
+  margin: 0;
+  min-height: 0;
+}
+
+.usuario__info {
+  flex: 1 1 10rem;
+  min-width: 0;
+}
+
+.usuario__acoes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .6rem;
+}
+
+.usuario__excluir {
+  padding: .35rem .75rem;
+}
 
 @media (max-width: 480px) {
-  .botao { width: 100%; justify-self: stretch; }
-  .usuario__data { white-space: normal; }
+  .botao {
+    width: 100%;
+    justify-self: stretch;
+  }
+
+  .usuario__data {
+    white-space: normal;
+  }
+
+  .usuario__acoes {
+    width: 100%;
+  }
 }
