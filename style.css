@@ -1,0 +1,177 @@
+/* ===== Variáveis: troque aqui para casar com o CSS do resto do site ===== */
+:root {
+  --amarelo: #ffc800;
+  --amarelo-escuro: #e6b400;
+  --preto: #1a1a1a;
+  --cinza: #5f5f5f;
+  --borda: #d6d6d6;
+  --fundo: #f4f4f4;
+  --erro: #c62828;
+  --ok: #1b7a3d;
+  --fonte: "Montserrat", "Segoe UI", Arial, sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--fonte);
+  color: var(--preto);
+  background: var(--fundo);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Cabeçalho */
+.topo {
+  background: var(--preto);
+  padding: 16px 24px;
+}
+.topo a {
+  color: var(--amarelo);
+  font-weight: 800;
+  font-size: 1.4rem;
+  text-decoration: none;
+  letter-spacing: -0.5px;
+}
+
+/* Layout em duas colunas */
+.pagina {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.destaque {
+  background: var(--amarelo);
+  padding: 64px 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.destaque h1 {
+  font-size: clamp(2rem, 4.5vw, 3.4rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -1px;
+  max-width: 14ch;
+}
+.destaque p {
+  margin-top: 20px;
+  font-size: 1.05rem;
+  max-width: 36ch;
+  line-height: 1.5;
+}
+
+.painel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+}
+.cartao {
+  background: #fff;
+  width: 100%;
+  max-width: 460px;
+  padding: 36px 32px;
+  border-radius: 16px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+}
+.cartao h2 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+.cartao .sub {
+  color: var(--cinza);
+  font-size: 0.95rem;
+  margin-bottom: 24px;
+}
+
+/* Campos */
+.campo { margin-bottom: 16px; }
+.campo label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 6px;
+}
+.campo input[type="text"],
+.campo input[type="email"],
+.campo input[type="tel"],
+.campo input[type="date"],
+.campo input[type="password"] {
+  width: 100%;
+  padding: 13px 14px;
+  font: inherit;
+  border: 2px solid var(--borda);
+  border-radius: 10px;
+  background: #fff;
+  transition: border-color 0.15s;
+}
+.campo input:focus {
+  outline: none;
+  border-color: var(--preto);
+  box-shadow: 0 0 0 3px var(--amarelo);
+}
+.campo.invalido input { border-color: var(--erro); }
+.campo.valido input { border-color: var(--ok); }
+.erro {
+  display: block;
+  min-height: 1.1em;
+  margin-top: 4px;
+  font-size: 0.82rem;
+  color: var(--erro);
+}
+
+.duas-colunas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.campo label.termos {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 0.9rem;
+}
+.termos input { margin-top: 3px; width: 18px; height: 18px; accent-color: var(--preto); }
+
+/* Botões */
+.botoes { display: flex; gap: 12px; margin-top: 20px; }
+.btn {
+  font: inherit;
+  font-weight: 800;
+  padding: 14px 22px;
+  border-radius: 999px;
+  border: 2px solid var(--preto);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.btn-primario { background: var(--preto); color: var(--amarelo); flex: 1; }
+.btn-primario:hover { background: #000; }
+.btn-secundario { background: #fff; color: var(--preto); }
+.btn-secundario:hover { background: var(--amarelo); }
+.btn:focus-visible { outline: 3px solid var(--amarelo); outline-offset: 2px; }
+
+.mensagem {
+  margin-top: 16px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.92rem;
+  display: none;
+}
+.mensagem.sucesso { display: block; background: #e5f5ea; color: var(--ok); }
+.mensagem.falha { display: block; background: #fdeaea; color: var(--erro); }
+
+.alternar { margin-top: 20px; text-align: center; font-size: 0.92rem; }
+.alternar a { color: var(--preto); font-weight: 800; }
+
+/* Responsivo */
+@media (max-width: 800px) {
+  .pagina { grid-template-columns: 1fr; }
+  .destaque { padding: 32px 24px; }
+  .destaque p { display: none; }
+  .duas-colunas { grid-template-columns: 1fr; gap: 0; }
+}
