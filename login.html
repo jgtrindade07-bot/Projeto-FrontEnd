@@ -3,18 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Entrar</title>
+  <title>Entrar | Academia das Maravilhas</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&amp;family=Open+Sans:wght@400;600&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="topo"><a href="index.html">Sua Academia</a></header>
+  <header class="topo topo-interno">
+    <a class="logo" href="index.html">Academia das Maravilhas</a>
+    <a class="topo-voltar" href="index.html">Página inicial</a>
+  </header>
 
   <main class="pagina">
     <section class="destaque">
       <h1>Bom te ver de volta.</h1>
-      <p>Entre para acompanhar seus treinos e seu plano.</p>
+      <p>Acesse a conta de demonstração criada neste navegador.</p>
     </section>
 
     <section class="painel">
@@ -25,14 +28,14 @@
         <form id="form-login" novalidate>
           <div class="campo">
             <label for="email">E-mail</label>
-            <input type="email" id="email" name="email" autocomplete="email">
-            <span class="erro" aria-live="polite"></span>
+            <input type="email" id="email" name="email" maxlength="254" autocomplete="email" aria-describedby="erro-email">
+            <span id="erro-email" class="erro" aria-live="polite"></span>
           </div>
 
           <div class="campo">
             <label for="senha">Senha</label>
-            <input type="password" id="senha" name="senha" autocomplete="current-password">
-            <span class="erro" aria-live="polite"></span>
+            <input type="password" id="senha" name="senha" maxlength="128" autocomplete="current-password" aria-describedby="erro-senha">
+            <span id="erro-senha" class="erro" aria-live="polite"></span>
           </div>
 
           <div class="botoes">
@@ -47,6 +50,22 @@
     </section>
   </main>
 
+  <footer class="rodape rodape-interno">
+    <div class="rodape-grade">
+      <section>
+        <h2>Academia das Maravilhas</h2>
+        <p>Cornélio Procópio - PR</p>
+      </section>
+      <nav aria-label="Links do rodapé">
+        <a href="index.html">Página inicial</a>
+        <a href="curriculo.html">Currículo</a>
+      </nav>
+    </div>
+    <p class="copy">Academia das Maravilhas. Projeto acadêmico.</p>
+  </footer>
+
+  <script src="usuarios.js"></script>
+  <script src="senha.js"></script>
   <script src="login.js"></script>
 </body>
 </html>
