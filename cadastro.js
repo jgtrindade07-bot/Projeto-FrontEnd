@@ -49,7 +49,7 @@ const validadores = {
   email(v) {
     v = v.trim();
     if (!v) return "Informe seu e-mail.";
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)) return "Digite um e-mail válido, como nome@email.com.";
+    if (!Usuarios.emailValido(v)) return "Digite um e-mail válido, como nome@email.com.";
     return "";
   },
   cpf(v) {
@@ -93,7 +93,7 @@ const validadores = {
     return "";
   },
   termos() {
-    return form.termos.checked ? "" : "Aceite os termos para continuar.";
+    return form.termos.checked ? "" : "Confirme que você entende como o cadastro funciona.";
   },
 };
 
@@ -115,6 +115,7 @@ function limparEstado() {
   form.querySelectorAll(".campo").forEach(c => {
     c.classList.remove("invalido", "valido");
     c.querySelector(".erro").textContent = "";
+    c.querySelector("input").removeAttribute("aria-invalid");
   });
   mensagem.className = "mensagem";
   mensagem.textContent = "";
@@ -142,6 +143,7 @@ function atualizarResponsavel() {
     blocoResp.querySelectorAll(".campo").forEach(c => {
       c.classList.remove("invalido", "valido");
       c.querySelector(".erro").textContent = "";
+      c.querySelector("input").removeAttribute("aria-invalid");
     });
     if (!precisa) {
       form.responsavel.value = "";
@@ -159,40 +161,55 @@ form.addEventListener("reset", () => setTimeout(() => {
 }, 0));
 
 /* ---------- Envio ---------- */
-form.addEventListener("submit", e => {
-  e.preventDefault();
+const enviar = form.querySelector('button[type="submit"]');
+const limpar = form.querySelector('button[type="reset"]');
 
-  const resultados = Object.keys(validadores).map(n => [n, validarCampo(n)]);
+form.addEventListener("submit", async evento => {
+  evento.preventDefault();
+  if (enviar.disabled) return;
+
+  mensagem.className = "mensagem";
+  mensagem.textContent = "";
+  atualizarResponsavel();
+  const resultados = Object.keys(validadores).map(nome => [nome, validarCampo(nome)]);
   const primeiroInvalido = resultados.find(([, ok]) => !ok);
   if (primeiroInvalido) {
     form[primeiroInvalido[0]].focus();
     return;
   }
 
-  // Armazenamento didático (localStorage). Em produção isso seria feito no servidor.
-  const usuarios = JSON.parse(localStorage.getItem("usuarios") || "[]");
-  const email = form.email.value.trim().toLowerCase();
+  const email = Usuarios.normalizarEmail(form.email.value);
+  const nome = form.nome.value.trim();
+  const senha = form.senha.value;
+  enviar.disabled = true;
+  limpar.disabled = true;
 
-  if (usuarios.some(u => u.email === email)) {
+  try {
+    const credencial = await Senha.criar(senha);
+    const salvo = await Usuarios.atualizar(usuarios => {
+      if (usuarios.some(usuario => Usuarios.normalizarEmail(usuario.email) === email)) return false;
+      usuarios.push({ nome, email, dataCadastro: new Date().toISOString(), credencial });
+      return true;
+    });
+    if (!salvo) {
+      mensagem.className = "mensagem falha";
+      mensagem.textContent = "Este e-mail já está cadastrado. Tente entrar ou use outro e-mail.";
+      form.email.focus();
+      return;
+    }
+  } catch {
     mensagem.className = "mensagem falha";
-    mensagem.textContent = "Este e-mail já está cadastrado. Tente entrar.";
+    mensagem.textContent = "Não foi possível salvar a conta. Abra o projeto em HTTPS ou em localhost com o armazenamento ativado.";
     return;
+  } finally {
+    enviar.disabled = false;
+    limpar.disabled = false;
   }
 
-  usuarios.push({
-    nome: form.nome.value.trim(),
-    email,
-    cpf: form.cpf.value,
-    nascimento: form.nascimento.value,
-    telefone: form.telefone.value,
-    responsavel: form.responsavel.value.trim() || null,
-    senha: form.senha.value,
-  });
-  localStorage.setItem("usuarios", JSON.stringify(usuarios));
-
-  mensagem.className = "mensagem sucesso";
-  mensagem.textContent = "Conta criada! Levando você para o login...";
-  setTimeout(() => {
-    window.location.href = "login.html?email=" + encodeURIComponent(email);
-  }, 1500);
+  try {
+    Usuarios.passarEmailCadastro(email);
+  } catch {
+    // O login aceita que o e-mail seja preenchido manualmente.
+  }
+  window.location.assign("login.html");
 });
