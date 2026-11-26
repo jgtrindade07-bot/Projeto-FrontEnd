@@ -14,7 +14,7 @@
   <header class="topo topo-nav">
     <a href="index.html" class="logo">Academia das Maravilhas</a>
 
-    <button type="button" class="menu-botao" id="menu-botao" aria-expanded="false" aria-controls="menu">
+    <button type="button" class="menu-botao" id="menu-botao" hidden aria-expanded="false" aria-controls="menu">
       Menu
     </button>
 
@@ -24,11 +24,12 @@
         <li><a href="#modalidades">Modalidades</a></li>
         <li><a href="#planos">Planos</a></li>
         <li><a href="#contato">Contato</a></li>
-        <li><a href="login.html">Entrar</a></li>
-        <li><a href="cadastro.html" class="menu-destaque">Cadastre-se</a></li>
+        <li><a href="login.html" id="menu-entrar">Entrar</a></li>
+        <li id="menu-cadastro"><a href="cadastro.html" class="menu-destaque">Cadastre-se</a></li>
+        <li id="menu-conta" hidden><button type="button" id="sair">Sair</button></li>
         <li>
           <a href="admin.html" class="menu-admin">
-            <svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm0 2c-3.3 0-8 1.7-8 5v1h16v-1c0-3.3-4.7-5-8-5z"/></svg>
+            <svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm0 2c-3.3 0-8 1.7-8 5v1h16v-1c0-3.3-4.7-5-8-5z"/></svg>
             Admin
           </a>
         </li>
@@ -37,8 +38,8 @@
   </header>
 
   <main>
-    <div id="boas-vindas" class="boas-vindas" role="status" hidden>
-      <p id="boas-vindas-texto"></p>
+    <div id="boas-vindas" class="boas-vindas" hidden>
+      <p id="boas-vindas-texto" role="status"></p>
       <button type="button" id="boas-vindas-fechar" aria-label="Fechar mensagem">&times;</button>
     </div>
 
@@ -62,7 +63,7 @@
         <article class="card">
           <img src="imagens/musculacao.svg" alt="Ilustração de uma barra com anilhas de musculação" width="600" height="400">
           <div class="card-corpo">
-            <svg class="icone icone-card" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9h2v6H3V9zm3-2h2v10H6V7zm10 0h2v10h-2V7zm3 2h2v6h-2V9zM9 11h6v2H9v-2z"/></svg>
+            <svg class="icone icone-card" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3 9h2v6H3V9zm3-2h2v10H6V7zm10 0h2v10h-2V7zm3 2h2v6h-2V9zM9 11h6v2H9v-2z"/></svg>
             <h3>Musculação</h3>
             <p>Ganho de força e massa com acompanhamento individual e máquinas de última geração.</p>
           </div>
@@ -71,7 +72,7 @@
         <article class="card">
           <img src="imagens/funcional.svg" alt="Ilustração de um alvo representando o treino funcional" width="600" height="400">
           <div class="card-corpo">
-            <svg class="icone icone-card" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z"/></svg>
+            <svg class="icone icone-card" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M13 2 4 14h6l-1 8 9-12h-6l1-8z"/></svg>
             <h3>Funcional</h3>
             <p>Treinos dinâmicos que melhoram condicionamento, equilíbrio e resistência.</p>
           </div>
@@ -80,7 +81,7 @@
         <article class="card">
           <img src="imagens/aulas-coletivas.svg" alt="Ilustração de três pessoas em uma aula coletiva" width="600" height="400">
           <div class="card-corpo">
-            <svg class="icone icone-card" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 2c-2.3 0-7 1.2-7 3.5V19h14v-2.5C15 14.2 10.3 13 8 13zm8 0c-.3 0-.6 0-1 .1 1.2.8 2 1.9 2 3.4V19h6v-2.5c0-2.3-4.700-3.500-7-3.500z"/></svg>
+            <svg class="icone icone-card" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 2c-2.3 0-7 1.2-7 3.5V19h14v-2.5C15 14.2 10.3 13 8 13zm8 0c-.3 0-.6 0-1 .1 1.2.8 2 1.9 2 3.4V19h6v-2.5c0-2.3-4.700-3.500-7-3.500z"/></svg>
             <h3>Aulas coletivas</h3>
             <p>Spinning, ritmos e alongamento em turma, com muita energia e motivação.</p>
           </div>
@@ -126,12 +127,13 @@
           <li><a href="cadastro.html">Criar conta</a></li>
           <li><a href="login.html">Entrar</a></li>
           <li><a href="admin.html">Área admin</a></li>
-          <li><a href="curriculo.pdf" target="_blank" rel="noopener">Currículo</a></li>
+          <li><a href="curriculo.html">Currículo</a></li>
         </ul>
       </nav>
     </div>
     <p class="copy">&copy; <span id="ano">2026</span> Academia das Maravilhas. Projeto acadêmico.</p>
   </footer>
+  <script src="usuarios.js"></script>
   <script src="index.js"></script>
 </body>
 </html>
