@@ -4,9 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Admin – Cadastro de usuários</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&amp;family=Open+Sans:wght@400;600&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="admin.css">
 </head>
-<body>
+<body class="pagina-admin">
+  <header class="topo topo-interno">
+    <a class="logo" href="index.html">Academia das Maravilhas</a>
+    <a class="topo-voltar" href="index.html">Página inicial</a>
+  </header>
   <main class="admin">
     <header class="admin__header">
       <h1>Cadastro de usuários</h1>
@@ -16,26 +23,26 @@
     <form id="form-usuario" class="form" novalidate>
       <div class="campo">
         <label for="nome">Nome</label>
-        <input type="text" id="nome" name="nome" placeholder="Ex.: Maria Souza" autocomplete="name" required>
+        <input type="text" id="nome" name="nome" placeholder="Ex.: Maria Souza" autocomplete="name" maxlength="120" aria-describedby="mensagem" required>
       </div>
 
       <div class="campo">
         <label for="email">E-mail</label>
-        <input type="email" id="email" name="email" placeholder="maria@exemplo.com" autocomplete="email" required>
+        <input type="email" id="email" name="email" placeholder="maria@exemplo.com" autocomplete="email" maxlength="254" aria-describedby="mensagem" required>
       </div>
 
-      <p id="mensagem" class="mensagem" role="alert" aria-live="polite"></p>
+      <p id="mensagem" class="mensagem" role="status"></p>
 
       <div class="form__acoes">
-        <button type="submit" class="botao">Cadastrar</button>
-        <button type="reset" class="botao botao--secundario">Limpar campos</button>
+        <button type="submit" class="btn btn-primario">Cadastrar</button>
+        <button type="reset" class="btn btn-secundario">Limpar campos</button>
       </div>
     </form>
 
     <section class="lista" aria-labelledby="titulo-lista">
       <div class="lista__topo">
         <h2 id="titulo-lista">Usuários cadastrados</h2>
-        <span id="contador" class="contador">0</span>
+        <span id="contador" class="contador" role="status" aria-label="Total de usuários exibidos">0</span>
       </div>
 
       <div class="lista__acoes">
@@ -50,7 +57,7 @@
           >
         </div>
 
-        <button type="button" id="excluir-todos" class="botao botao--perigo" disabled>
+        <button type="button" id="excluir-todos" class="btn btn-perigo" disabled>
           Excluir todos
         </button>
       </div>
@@ -68,11 +75,26 @@
       </p>
 
       <template id="modelo-excluir-usuario">
-        <button type="button" class="botao botao--perigo usuario__excluir">Excluir</button>
+        <button type="button" class="btn btn-perigo usuario__excluir">Excluir</button>
       </template>
     </section>
   </main>
 
+  <footer class="rodape rodape-interno">
+    <div class="rodape-grade">
+      <section>
+        <h2>Academia das Maravilhas</h2>
+        <p>Cornélio Procópio - PR</p>
+      </section>
+      <nav aria-label="Links do rodapé">
+        <a href="index.html">Página inicial</a>
+        <a href="curriculo.html">Currículo</a>
+      </nav>
+    </div>
+    <p class="copy">Academia das Maravilhas. Projeto acadêmico.</p>
+  </footer>
+
+  <script src="usuarios.js"></script>
   <script src="admin.js"></script>
 </body>
 </html>

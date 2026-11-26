@@ -1,6 +1,3 @@
-// Chave única do Local Storage: guarda um array de usuários em JSON
-const CHAVE_STORAGE = "usuarios";
-
 const form = document.getElementById("form-usuario");
 const inputNome = document.getElementById("nome");
 const inputEmail = document.getElementById("email");
@@ -14,32 +11,15 @@ const mensagemListaEl = document.getElementById("mensagem-lista");
 const semResultadosEl = document.getElementById("sem-resultados");
 const modeloExcluirEl = document.getElementById("modelo-excluir-usuario");
 
-/* ---------- Local Storage ---------- */
-
-function carregarUsuarios() {
-  try {
-    const dados = JSON.parse(localStorage.getItem(CHAVE_STORAGE));
-    return Array.isArray(dados) ? dados : [];
-  } catch (erro) {
-    return [];
-  }
-}
-
-function salvarUsuarios(usuarios) {
-  localStorage.setItem(CHAVE_STORAGE, JSON.stringify(usuarios));
-}
-
 /* ---------- Utilidades ---------- */
 
 function formatarData(iso) {
-  return new Date(iso).toLocaleString("pt-BR", {
+  const data = new Date(iso);
+  if (!iso || Number.isNaN(data.getTime())) return "Data de cadastro indisponível";
+  return "Cadastrado em " + data.toLocaleString("pt-BR", {
     dateStyle: "short",
     timeStyle: "short",
   });
-}
-
-function emailValido(email) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
 function mostrarMensagem(texto, tipo) {
@@ -54,14 +34,25 @@ function normalizarPesquisa(texto) {
 }
 
 function renderizarLista() {
-  const usuarios = carregarUsuarios();
+  let usuarios;
+  try {
+    usuarios = Usuarios.ler();
+  } catch {
+    listaEl.replaceChildren();
+    contadorEl.textContent = "—";
+    vazioEl.hidden = true;
+    semResultadosEl.hidden = true;
+    excluirTodosEl.disabled = true;
+    mostrarMensagemLista("Não foi possível carregar os usuários salvos.", "falha");
+    return;
+  }
   const termo = normalizarPesquisa(pesquisaEl.value);
   const resultados = usuarios.filter((usuario) =>
     normalizarPesquisa(usuario.nome).includes(termo) ||
     normalizarPesquisa(usuario.email).includes(termo)
   );
 
-  listaEl.innerHTML = "";
+  listaEl.replaceChildren();
   contadorEl.textContent = termo
     ? resultados.length + " de " + usuarios.length
     : usuarios.length;
@@ -88,7 +79,7 @@ function renderizarLista() {
 
     const data = document.createElement("p");
     data.className = "usuario__data";
-    data.textContent = "Cadastrado em " + formatarData(usuario.dataCadastro);
+    data.textContent = formatarData(usuario.dataCadastro);
 
     const excluir = modeloExcluirEl.content.firstElementChild.cloneNode(true);
     excluir.setAttribute("aria-label", "Excluir " + usuario.nome + " (" + usuario.email + ")");
@@ -110,29 +101,23 @@ function mostrarMensagemLista(texto, tipo = "") {
   mensagemListaEl.className = "mensagem lista__mensagem " + tipo;
 }
 
-function atualizarAposExclusao(usuarios, texto) {
+async function excluirUsuario(email, indiceVisivel) {
   try {
-    salvarUsuarios(usuarios);
-  } catch (erro) {
-    mostrarMensagemLista("Não foi possível salvar a exclusão neste navegador.", "erro");
-    return false;
-  }
+    const excluido = await Usuarios.atualizar(usuarios => {
+      const indice = usuarios.findIndex(usuario => usuario.email === email);
+      if (indice === -1) return false;
+      usuarios.splice(indice, 1);
+      return true;
+    });
 
-  renderizarLista();
-  mostrarMensagemLista(texto, "sucesso");
-  return true;
-}
-
-function excluirUsuario(email, indiceVisivel) {
-  const usuarios = carregarUsuarios();
-  const indice = usuarios.findIndex((usuario) => usuario.email === email);
-  if (indice === -1) return;
-
-  usuarios.splice(indice, 1);
-  if (atualizarAposExclusao(usuarios, "Usuário excluído.")) {
+    renderizarLista();
+    if (!excluido) return;
+    mostrarMensagemLista("Usuário excluído.", "sucesso");
     const botoes = listaEl.querySelectorAll(".usuario__excluir");
     const proximo = botoes[indiceVisivel] || botoes[indiceVisivel - 1] || pesquisaEl;
     proximo.focus();
+  } catch {
+    mostrarMensagemLista("Não foi possível salvar a exclusão neste navegador.", "falha");
   }
 }
 
@@ -141,72 +126,73 @@ pesquisaEl.addEventListener("input", () => {
   renderizarLista();
 });
 
-excluirTodosEl.addEventListener("click", () => {
-  if (carregarUsuarios().length === 0) return;
-
+excluirTodosEl.addEventListener("click", async () => {
   const confirmou = window.confirm(
     "Excluir todos os usuários cadastrados, inclusive os que não aparecem na pesquisa?"
   );
   if (!confirmou) return;
 
-  if (atualizarAposExclusao([], "Todos os usuários foram excluídos.")) {
+  try {
+    await Usuarios.atualizar(usuarios => { usuarios.length = 0; });
+    renderizarLista();
+    mostrarMensagemLista("Todos os usuários foram excluídos.", "sucesso");
     pesquisaEl.focus();
+  } catch {
+    mostrarMensagemLista("Não foi possível salvar a exclusão neste navegador.", "falha");
   }
 });
 
+function marcarInvalido(campo, texto) {
+  campo.setAttribute("aria-invalid", "true");
+  mostrarMensagem(texto, "falha");
+  campo.focus();
+}
+
 form.addEventListener("reset", () => {
-  inputNome.classList.remove("invalido");
-  inputEmail.classList.remove("invalido");
+  inputNome.removeAttribute("aria-invalid");
+  inputEmail.removeAttribute("aria-invalid");
   mostrarMensagem("", "");
   inputNome.focus();
 });
 
-/* ---------- Cadastro ---------- */
-
-form.addEventListener("submit", (evento) => {
+const enviar = form.querySelector('button[type="submit"]');
+form.addEventListener("submit", async evento => {
   evento.preventDefault();
+  if (enviar.disabled) return;
 
   const nome = inputNome.value.trim();
-  const email = inputEmail.value.trim();
+  const email = Usuarios.normalizarEmail(inputEmail.value);
+  inputNome.removeAttribute("aria-invalid");
+  inputEmail.removeAttribute("aria-invalid");
 
-  inputNome.classList.remove("invalido");
-  inputEmail.classList.remove("invalido");
-
-  if (!nome) {
-    inputNome.classList.add("invalido");
-    mostrarMensagem("Informe o nome do usuário.", "erro");
-    inputNome.focus();
-    return;
+  if (!nome) return marcarInvalido(inputNome, "Informe o nome do usuário.");
+  if (!Usuarios.emailValido(email)) {
+    return marcarInvalido(inputEmail, "Informe um e-mail válido, como nome@exemplo.com.");
   }
 
-  if (!emailValido(email)) {
-    inputEmail.classList.add("invalido");
-    mostrarMensagem("Informe um e-mail válido, como nome@exemplo.com.", "erro");
-    inputEmail.focus();
-    return;
+  enviar.disabled = true;
+  try {
+    const salvo = await Usuarios.atualizar(usuarios => {
+      if (usuarios.some(usuario => Usuarios.normalizarEmail(usuario.email) === email)) return false;
+      usuarios.push({ nome, email, dataCadastro: new Date().toISOString() });
+      return true;
+    });
+
+    if (!salvo) return marcarInvalido(inputEmail, "Este e-mail já está cadastrado.");
+    form.reset();
+    pesquisaEl.value = "";
+    mostrarMensagemLista("");
+    renderizarLista();
+    mostrarMensagem("Usuário cadastrado.", "sucesso");
+  } catch {
+    mostrarMensagem("Não foi possível salvar o usuário neste navegador.", "falha");
+  } finally {
+    enviar.disabled = false;
   }
-
-  const usuarios = carregarUsuarios();
-
-  if (usuarios.some((usuario) => usuario.email.toLowerCase() === email.toLowerCase())) {
-    inputEmail.classList.add("invalido");
-    mostrarMensagem("Este e-mail já está cadastrado.", "erro");
-    inputEmail.focus();
-    return;
-  }
-
-  usuarios.push({
-    nome: nome,
-    email: email,
-    dataCadastro: new Date().toISOString(),
-  });
-
-  salvarUsuarios(usuarios);
-  renderizarLista();
-
-  form.reset();
-  mostrarMensagem("Usuário cadastrado.", "sucesso");
 });
 
-// Exibe os usuários já salvos ao abrir a página
+window.addEventListener("storage", evento => {
+  if (evento.key === Usuarios.chave || evento.key === null) renderizarLista();
+});
+
 renderizarLista();
