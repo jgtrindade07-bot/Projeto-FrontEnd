@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Currículo - Felipe Bonani</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;1,400&amp;family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="estilo.css">
+  <link rel="stylesheet" href="../navegacao.css">
+</head>
+
+<body>
+
+  <nav class="voltar-equipe" aria-label="Navegação do currículo">
+    <a href="../../curriculo.html">Voltar aos currículos da equipe</a>
+  </nav>
+
+  <div class="header">
+    <img src="Imagens/imagem.jpeg" alt="Logotipos de HTML5 e CSS3" class="foto-perfil" width="400" height="200">
+    <h1 id="titulo-principal">Felipe Bonani</h1>
+    <p class="subtitulo">Desenvolvedor Junior</p>
+  </div>
+
+  <section class="contato">
+    <h2>Contato</h2>
+    <ul>
+      <li><strong>Telefone:</strong> (18)991975735</li>
+      <li><strong>Email:</strong> felipe.bonani@hotmail.com</li>
+      <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/felipe-bonani-000629321/">https://www.linkedin.com/in/felipe-bonani-000629321/</a></li>
+    </ul>
+  </section>
+
+  <section class="habilidades">
+    <h2>Habilidades</h2>
+    <ul>
+      <li>JavaScript</li>
+      <li>HTML5 &amp; CSS3</li>
+      <li>React</li>
+      <li>Node.js</li>
+      <li>Flexbox &amp; Grid</li>
+      <li>Git &amp; GitHub</li>
+    </ul>
+  </section>
+
+  <section class="resumo">
+    <h2>Resumo</h2>
+    <p>Desenvolvedor de aplicações</p>
+  </section>
+
+  <section class="experiencia">
+    <h2>Experiência Profissional</h2>
+
+    <div class="item-experiencia">
+      <h3>
+        <img src="Imagens/dabl.png" alt="Logo Destilaria Água Bonita" width="150" height="100">
+        Assistente de T.I | Destilaria Água Bonita
+      </h3>
+      <p class="periodo">07/2025 - 12/2025</p>
+
+      <ul>
+        <li>Realizava consertos técnicos, ajudava no desenvolvimento de aplicações para melhoria das funções da equipe, atendia os usuários por meio de tickets, fazendo a triagem dos tickets criados pelos usuários.</li>
+        <li>Colaborou com equipes de design e back-end para entregar novas funcionalidades.</li>
+        <li>Otimizou o desempenho do site, resultando em uma melhoria na velocidade de carregamento.</li>
+      </ul>
+    </div>
+
+    <div class="item-experiencia">
+      <h3>
+        <img src="Imagens/djl.jpg" alt="Logo David José Luiz" width="150" height="100">
+        Técnico T.I | David José Luiz
+      </h3>
+      <p class="periodo">03/2026 - 08/2026</p>
+      <ul>
+        <li>Participei com desenvolvimento de aplicações reais em infraestrutura da escola, manejo técnico em computadores e impressoras.</li>
+        <li>Trabalhei em equipe para a realização do conserto na infraestrutura e a implementação de ar-condicionados em todas as salas, e conectando eles em uma rede dos sistemas para acessar funcionalidades remotas.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="educacao">
+    <h2>Educação</h2>
+    <div class="item-educacao">
+      <div class="bloco-curso">
+        <h3>
+          <img src="Imagens/utfpr.png" alt="Logo UTFPR" width="200" height="100">
+          - UTFPR - Universidade Tecnológica Federal do Paraná | Jan. 2026 - Dez. 2029
+        </h3>
+        <p>Análise e Desenvolvimento de Sistemas</p>
+      </div>
+
+      <div class="bloco-curso">
+        <h3>
+          <img src="Imagens/etec.png" alt="Logo ETEC" width="150" height="100">
+          ETEC - Cândido Mota | Junho 2024 - Dez. 2025
+        </h3>
+        <p>Técnico em Informática</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="acao-contato">
+    <button type="button" id="btnAbrirModal">Enviar informações de contato</button>
+  </section>
+
+  <dialog id="modalContato">
+    <form method="dialog">
+      <h2>Informações de Contato</h2>
+
+      <p>
+        <label for="nome">Nome Completo:</label><br>
+        <input type="text" id="nome" name="nome" required>
+      </p>
+
+      <p>
+        <label for="instagram">Link para o Instagram:</label><br>
+        <input type="url" id="instagram" name="instagram" placeholder="https://instagram.com/seu.usuario" required>
+      </p>
+
+      <p>
+        <label for="whatsapp">Número do WhatsApp:</label><br>
+        <input type="tel" id="whatsapp" name="whatsapp" placeholder="(00) 00000-0000" required>
+      </p>
+
+      <div>
+        <button type="submit" value="enviar">Enviar</button>
+        <button type="button" id="btnFecharModal">Fechar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script>
+    const modal = document.getElementById('modalContato');
+    const btnAbrir = document.getElementById('btnAbrirModal');
+    const btnFechar = document.getElementById('btnFecharModal');
+
+    btnAbrir.addEventListener('click', () => {
+      modal.showModal();
+    });
+
+    btnFechar.addEventListener('click', () => {
+      modal.close();
+    });
+  </script>
+</body>
+
+</html>

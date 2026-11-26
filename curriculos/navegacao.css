@@ -1,0 +1,30 @@
+.voltar-equipe {
+  margin: 1rem auto;
+  padding: 0 1rem;
+  max-width: 56rem;
+  text-align: center;
+}
+
+.voltar-equipe a {
+  display: inline-block;
+  padding: 0.65rem 1rem;
+  border: 2px solid #1a1a1a;
+  border-radius: 999px;
+  background: #ffc800;
+  color: #1a1a1a;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.voltar-equipe a:focus-visible {
+  outline: 3px solid #1a1a1a;
+  outline-offset: 3px;
+}
+
+body {
+  overflow-wrap: anywhere;
+}
+
+img {
+  max-width: 100%;
+}

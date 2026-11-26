@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Currículo - Gabriel Peixoto de Souza</title>
+        <link rel="icon" type="image/jpeg" href="icones/favico.jpg">
+        <link rel="stylesheet" href="style.css">
+      <link rel="stylesheet" href="../navegacao.css">
+</head>
+
+    <body>
+
+  <nav class="voltar-equipe" aria-label="Navegação do currículo">
+    <a href="../../curriculo.html">Voltar aos currículos da equipe</a>
+  </nav>
+
+        <main class="curriculo">
+            <div class="header">
+                <img src="img/foto-perfil.png"
+                     alt="Foto de Gabriel Peixoto de Souza" class="foto-perfil" width="100" height="100">
+                <h1 id="titulo-principal">Gabriel Peixoto de Souza</h1>
+                <p>Estudante de Análise e Desenvolvimento de Sistemas</p>
+            </div>
+
+            <section class="contato">
+                <h2>Contato</h2>
+                <ul>
+                    <li><strong>Telefone: </strong>(43) 99807-7364</li>
+                    <li><strong>Email: </strong>gabrielpeixoto@alunos.utfpr.edu.br</li>
+                    <li><strong>LinkedIn: </strong><a href="https://www.linkedin.com/in/gabriel-peixoto-3b5b00420/">linkedin.com/in/gabriel-peixoto-3b5b00420/</a></li>
+                    <li><strong>GitHub: </strong><a href="https://github.com/gabrielp-s">github.com/gabrielp-s</a></li>
+                </ul>
+            </section>
+
+            <section class="habilidades">
+                <h2>Habilidades</h2>
+                <ul>
+                    <li>Linguagem C</li>
+                    <li>HTML5 &amp; CSS3</li>
+                    <li>Git &amp; GitHub</li>
+                    <li>Java</li>
+                    <li>SQL &amp; MySQL</li>
+                </ul>
+            </section>
+
+            <section class="resumo">
+                <h2>Resumo</h2>
+                <p>Estudante do segundo período de análise e desenvolvimento de sistemas, com experiencia em linguagem C, banco de dados e desenvolvimento web</p>
+            </section>
+
+            <section class="experiencia">
+                <h2>Experiência Profissional</h2>
+                <h3>Estagiário | Municipio de Barra do Jacaré</h3>
+                <p>09/2026 - Atual</p>
+                <ul>
+                    <li>Gestão da rede de Tecnologia da Informação e Comunicação - TIC Municipal</li>
+                    <li>Diagnóstico e Manutenção da infraestrutura tecnológica</li>
+                    <li>Atendimento das demandas relacionadas à rede local</li>
+                </ul>
+            </section>
+
+            <section class="educação">
+                <h2>Educação</h2>
+                <h3>Análise e Desenvolvimento de Sistemas</h3>
+                <p>Universidade Tecnológica Federal do Paraná | Cursando</p>
+            </section>
+
+            <button class="botao-contato" onclick="document.getElementById('modalContato').showModal()">
+                Enviar informações de contato
+            </button>
+        </main>
+
+        <dialog id="modalContato">
+            <h2>Deixe seu contato</h2>
+
+            <form method="dialog">
+                <p>
+                    <label for="nomeCompleto">Nome Completo:</label><br>
+                    <input type="text" id="nomeCompleto" name="nomeCompleto" required>
+                </p>
+
+                <p>
+                    <label for="instagramLink">Link para o Instagram:</label><br>
+                    <input type="url" id="instagramLink" name="instagramLink"
+                           placeholder="https://instagram.com/seuusuario">
+                </p>
+
+                <p>
+                    <label for="whatsappNum">Número do WhatsApp:</label><br>
+                    <input type="tel" id="whatsappNum" name="whatsappNum" placeholder="(XX) 9XXXX-XXXX">
+                </p>
+
+                <br>
+                <button type="submit">Enviar</button>
+                <button type="button" onclick="document.getElementById('modalContato').close()">Fechar</button>
+            </form>
+        </dialog>
+    </body>
+</html>

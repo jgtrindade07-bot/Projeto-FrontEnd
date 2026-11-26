@@ -1,0 +1,163 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,700;1,400&family=Roboto:ital,wght@0,400;0,700;1,400&display=swap');
+
+body {
+    margin: 0;
+    padding: 30px 15px;
+    background-color: #111827;
+    color: #e5e7eb;
+    font-family: 'Roboto', Arial, sans-serif; /* fonte externa */
+    line-height: 1.6;
+}
+
+.curriculo {
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 35px;
+    background-color: #1f2937;
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+.header {
+    text-align: center;
+    padding-bottom: 25px;
+    border-bottom: 2px solid #60a5fa;
+}
+
+.foto-perfil {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid #60a5fa;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.35);
+}
+
+#titulo-principal {
+    margin: 15px 0 5px;
+    color: #ffffff;
+    font-family: 'Montserrat', Georgia, serif; /* segunda fonte */
+    font-size: 2.2rem;
+    font-weight: 700;
+}
+
+.header p {
+    margin: 0;
+    color: #93c5fd;
+    font-style: italic;
+}
+
+h2 {
+    color: #60a5fa;
+    font-family: 'Montserrat', Georgia, serif;
+    border-bottom: 1px solid #374151;
+    padding-bottom: 6px;
+}
+
+h3 {
+    color: #f3f4f6;
+    font-family: 'Montserrat', Georgia, serif;
+}
+
+section p {
+    color: #d1d5db;
+}
+
+.contato,
+.habilidades,
+.resumo,
+.experiencia,
+.educação {
+    margin-top: 25px;
+}
+
+li {
+    margin-bottom: 8px;
+}
+
+strong {
+    font-weight: 700;
+    color: #ffffff;
+}
+
+a {
+    color: #93c5fd;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: #fbbf24;
+    text-decoration: underline;
+}
+
+input[type="url"] {
+    border-left: 4px solid #60a5fa;
+}
+
+input {
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 5px;
+    padding: 10px 12px;
+    border: 1px solid #4b5563;
+    border-radius: 8px;
+    background-color: #111827;
+    color: #ffffff;
+    font-family: 'Roboto', Arial, sans-serif;
+}
+
+input:focus {
+    outline: 2px solid #60a5fa;
+    border-color: #60a5fa;
+}
+
+button {
+    padding: 11px 18px;
+    margin: 5px;
+    border: none;
+    border-radius: 8px;
+    background-color: #2563eb;
+    color: #ffffff;
+    font-family: 'Montserrat', Georgia, serif;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+button:hover {
+    background-color: #1d4ed8;
+}
+
+.botao-contato {
+    display: block;
+    margin: 30px auto 5px;
+}
+
+dialog {
+    width: min(90%, 450px);
+    padding: 25px;
+    border: 1px solid #60a5fa;
+    border-radius: 14px;
+    background-color: #1f2937;
+    color: #e5e7eb;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+}
+
+dialog::backdrop {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+dialog h2 {
+    margin-top: 0;
+}
+
+@media (max-width: 600px) {
+    .curriculo {
+        padding: 22px;
+    }
+
+    #titulo-principal {
+        font-size: 1.7rem;
+    }
+}

@@ -1,0 +1,197 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+
+/* Estilo geral da página */
+
+body {
+    background-color: #e8e8e8;
+    color: #222222;
+    font-family: Arial, sans-serif;
+    margin: 0;
+}
+
+
+/* Cabeçalho */
+
+.header {
+    width: 80%;
+    margin: auto;
+    background-color: white;
+    color: #222222;
+    text-align: left;
+    padding: 20px;
+}
+
+.header figure {
+    margin-left: 0;
+}
+
+.header p {
+    font-family: Roboto, sans-serif;
+    font-style: italic;
+    color: #333333;
+}
+
+
+/* Foto */
+
+.foto-perfil {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 3px solid #315a7d;
+    object-fit: cover;
+}
+
+
+/* Parte principal */
+
+main {
+    width: 80%;
+    margin: auto;
+    background-color: white;
+    padding: 20px;
+}
+
+
+/* Títulos */
+
+h1 {
+    color: #1f3f5b;
+    text-decoration: underline;
+}
+
+h2 {
+    color: #315a7d;
+    border-bottom: 1px solid #315a7d;
+}
+
+h3 {
+    color: #333333;
+}
+
+
+/* Parágrafos */
+
+p {
+    font-size: 16px;
+}
+
+
+/* Links */
+
+a {
+    color: #315a7d;
+}
+
+
+/* Pseudo-classe */
+
+a:hover {
+    color: #8b0000;
+}
+
+
+/* Seções */
+
+.contato {
+    margin-bottom: 20px;
+}
+
+.habilidades {
+    margin-bottom: 20px;
+}
+
+.resumo {
+    margin-bottom: 20px;
+}
+
+.ods {
+    margin-bottom: 20px;
+}
+
+.educacao {
+    margin-bottom: 20px;
+}
+
+
+/* Resumo */
+
+.resumo p {
+    font-style: italic;
+}
+
+
+/* Ícones */
+
+.icone {
+    vertical-align: middle;
+}
+
+
+/* Área de contato */
+
+.area-contato {
+    background-color: #f2f2f2;
+    padding: 15px;
+    margin-top: 20px;
+}
+
+.chamada-contato {
+    color: #315a7d;
+}
+
+
+/* Seletor por ID */
+
+#abrir-modal {
+    background-color: #315a7d;
+    color: white;
+    padding: 10px;
+}
+
+#fechar-modal {
+    background-color: gray;
+    color: white;
+    padding: 10px;
+}
+
+#modal-contato {
+    background-color: white;
+    border: 2px solid #315a7d;
+}
+
+
+/* Seletor por atributo */
+
+input[type="text"] {
+    background-color: #f5f5f5;
+}
+
+input[type="url"] {
+    background-color: #f5f5f5;
+}
+
+input[type="tel"] {
+    background-color: #f5f5f5;
+}
+
+
+/* Botões */
+
+button {
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+}
+
+
+/* Rodapé */
+
+footer {
+    width: 80%;
+    margin: auto;
+    background-color: #315a7d;
+    color: white;
+    text-align: center;
+    padding: 10px 20px;
+}

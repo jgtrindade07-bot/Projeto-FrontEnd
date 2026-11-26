@@ -225,3 +225,14 @@ h1, h2, h3, .logo, .btn { font-family: var(--fonte); }
   .destaque p { display: none; }
   .duas-colunas { grid-template-columns: 1fr; gap: 0; }
 }
+
+.curriculo .lista-curriculos {
+  margin-top: 1.25rem;
+  padding-left: 1.5rem;
+}
+
+.lista-curriculos a {
+  display: inline-block;
+  padding: 0.3rem 0;
+  color: var(--preto);
+}
